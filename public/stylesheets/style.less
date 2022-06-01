@@ -111,6 +111,9 @@ body {
   font-size: 12px;
   line-height: 15px;
   font-weight:300;
+  background-image: url(/images/bg.png);
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 .loader,
 .loader:after {
@@ -942,16 +945,23 @@ body {
 .qVoteAnswerWr{
   padding-bottom: 24px;
 }
+.logo svg{
+  height: 24px;
+  margin: 24px;
+  opacity: .5;
+}
 .voteWr{
-  background:rgba(0, 0, 0, 0.2);
+  background:rgba(0, 0, 0, 0.4);
   padding:24px;
-  width:100%;
+
   box-sizing: border-box;
   //position:absolute;
   left:0;
   bottom:0;
   width:~" calc(100% - 48px)";
   margin: 24px;
+  border: 1px solid #ffffff;
+  border-radius: 8px;
 }
 .voteTitle{
 color:#FFFFFF;
@@ -1032,13 +1042,17 @@ color:#FFFFFF;
   align-items: center;
   justify-content: center;
   opacity:1;
+  background: #ffffff;
+  color: #000000;
 }
 .votingButton:hover, .votingButton.active{
   color:#FFFFFF;
+  background:#30b48d;
 }
 .votingButton.active{
   cursor:auto;
-  background:#70AA70;
+  color:#FFFFFF;
+  background:#30b48d;
 
 }
 .qItemText textarea{
