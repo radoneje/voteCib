@@ -9,7 +9,7 @@ block content
         .votingBox(v-if="!v.iscompl")
           .votingButton(v-for="item in v.answers" v-on:click="voiting(item)" v-bind:class="{active:checkVote(item)}")
             .votingButtonTitle {{item.title}}
-              .votingButtonSubTitle {{item.subTitle}}
+              .votingButtonSubTitle(v-if="item.subTitle && item.subTitle.length>0") {{item.subTitle}}
         .voteComplBox(v-if="v.iscompl")
           .votingItem(v-for="item in v.answers")
             .votingItemTitle {{item.title}}
