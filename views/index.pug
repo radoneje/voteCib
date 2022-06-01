@@ -14,7 +14,7 @@ block content
             .votingItemTitle {{item.title}}
             .votingItemRes
               .votingItemResStart {{getPercent(v.total, item.count)}}
-              .votingItemResEnd(v-bind:style="{width:getPercent(v.total, item.count)}") &nbsp;
+              .votingItemResEnd(v-bind:style="{width:'calc('+getPercent(v.total, item.count)+' - 80px'}") &nbsp;
   script(src="/javascripts/vue.min.js")
   script(src="/javascripts/moment.min.js")
   script.
