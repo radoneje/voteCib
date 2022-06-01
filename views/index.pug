@@ -18,6 +18,9 @@ block content
             .votingItemRes
               .votingItemResStart {{getPercent(v.total, item.count)}}
               .votingItemResEnd(v-bind:style="{width:'calc('+getPercent(v.total, item.count)+' - 80px'}") &nbsp;
+  .completeWr.hidden
+      .completeText
+        .votingItem Спасибо! <br> Ваш голос учтен.
   script(src="/javascripts/vue.min.js")
   script(src="/javascripts/moment.min.js")
   script.

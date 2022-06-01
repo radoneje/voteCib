@@ -16,9 +16,7 @@ block content
                             .votingItemResStart &nbsp;
                                 span(v-if="vote[0].iscompl") {{getPercent(vote[0].total, item.count)}}
                             .votingItemResEnd(v-if="vote[0].iscompl" v-bind:style="{width:getPercent(vote[0].total, item.count)}") &nbsp;
-        .completeWr.hidden
-            .completeText
-                .votingItem Спасибо! <br> Ваш голос учтен.
+
 
 
     script(src="/javascripts/vue.min.js")
