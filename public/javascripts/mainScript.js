@@ -175,7 +175,7 @@
                     ////////////
                   ///  console.log("d.data.vote", d.data)
                     this.vote = d.data.vote
-                    console.log("d.data.vote", this.vote)
+                    console.log("d.data.vote", d.data)
                     /////
                 }
                 catch (e){
