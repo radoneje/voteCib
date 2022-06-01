@@ -40,7 +40,7 @@
                 await axios.post("/api/Vote", {id: item.id});
                 var elem = document.querySelector(".completeWr");
                 elem.classList.remove("hidden")
-                setTimeout(()=>{ elem.classList.add("hidden")},2000);
+                setTimeout(()=>{ elem.classList.add("hidden")},3000);
                 localStorage.setItem("vote"+item.voteid, item.id);
                 this.vote=this.vote.filter(v=>{return true});
 
