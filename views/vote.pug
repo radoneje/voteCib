@@ -16,8 +16,8 @@ block content
                             .votingItemResStart &nbsp;
                                 span(v-if="vote[0].iscompl") {{getPercent(vote[0].total, item.count)}}
                             .votingItemResEnd(v-if="vote[0].iscompl" v-bind:style="{width:getPercent(vote[0].total, item.count)}") &nbsp;
-    script(src="https://front.sber.link/vcbr/javascripts/vue.min.js")
-    script(src="https://front.sber.link/vcbr/javascripts/moment.min.js")
+    script(src="/javascripts/vue.min.js")
+    script(src="/javascripts/moment.min.js")
     style.
         body{width:1920px;height:1280px;overflow: hidden}
         .voteWr{position: inherit; border-radius:40px;}
