@@ -51,7 +51,7 @@ router.get("/status", async (req, res)=>{
       console.warn(e)
     }
 
-  res.json({chat, q, vote, status, timeout:300});
+  res.json({chat, q, vote, status, timeout});
 })
 router.get('/:id?', function(req, res, next) {
 
