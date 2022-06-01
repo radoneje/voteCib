@@ -53,6 +53,9 @@ router.get("/status", async (req, res)=>{
 
   res.json({chat, q, vote, status, timeout});
 })
+router.get('/vote', function(req, res, next) {
+    res.render('vote', );
+})
 router.get('/:id?', function(req, res, next) {
 
     res.render('index', { user: req.session["user"] });

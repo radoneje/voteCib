@@ -1,0 +1,83 @@
+extends layout
+
+block head
+    link(rel='stylesheet', href='/stylesheets/style.css')
+
+block content
+    .tower#app
+        .adminBottom
+            .voteWr(v-if="vote.length>0" )
+                .voteTitle(v-bind:class="{left:vote[0].iscompl}") {{vote[0].title}}
+
+                .voteComplBox
+                    .votingItem(v-for="item in vote[0].answers")
+                        .votingItemTitle {{item.title}}
+                        .votingItemRes
+                            .votingItemResStart &nbsp;
+                                span(v-if="vote[0].iscompl") {{getPercent(vote[0].total, item.count)}}
+                            .votingItemResEnd(v-if="vote[0].iscompl" v-bind:style="{width:getPercent(vote[0].total, item.count)}") &nbsp;
+    script(src="https://front.sber.link/vcbr/javascripts/vue.min.js")
+    script(src="https://front.sber.link/vcbr/javascripts/moment.min.js")
+    style.
+        body{width:1920px;height:1280px;overflow: hidden}
+        .voteWr{position: inherit; border-radius:40px;}
+        .adminBottom{
+            display: flex;
+            align-content: center;
+            flex-wrap: wrap;}
+        .voteTitle{
+            margin-bottom: 78px;
+            font-weight: 500;
+            font-size: 52px;
+            line-height: 60px;
+        }
+        .votingItem{
+
+            color: #FFFFFF;
+            font-size: 42px;
+            margin-bottom: 12px;
+            line-height: 48px;
+            padding: 8px 0;
+        }
+        .votingItemResStart{
+            width:175px;
+        }
+    script.
+        var app = new Vue({
+            el: "#app",
+            data: {
+                vote: []
+            },
+            methods: {
+                getCalcPercent: function (total, count) {
+
+                    var perc = getPercent(total, count);
+                    return 'calc(100% - ' + perc + ')';
+                },
+                getPercent: function (total, count) {
+                    if (total == 0)
+                        return "0%"
+                    var perc = (parseFloat(count) / parseFloat(total) * 100);
+                    return perc.toPrecision(4) + "%"
+                },
+                updateStatus: async function () {
+                    try {
+                        var d = await axios.get("/status/");
+
+                        this.vote = d.data.vote
+                        console.log(this.vote)
+                    }
+                    catch (e){
+                        console.warn(e);
+                    }
+                    setTimeout(() => {
+                        this.updateStatus();
+                    }, 5 * 1000)
+                }
+            },
+            mounted: function () {
+                this.updateStatus();
+
+            }
+        })
+
