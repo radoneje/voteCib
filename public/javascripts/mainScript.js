@@ -38,7 +38,7 @@
                     await axios.post("/api/reVote", {id: store});
                 }
                 await axios.post("/api/Vote", {id: item.id});
-                item.subTitle="Спасибо, Ваш голос учтен."
+                item.subTitle="Спасибо, Ваш голос учтен"
                 //setTimeout(()=>{item.subTitle=""},2000);
                 localStorage.setItem("vote"+item.voteid, item.id);
                 this.vote=this.vote.filter(v=>{return true});
