@@ -1,0 +1,10 @@
+{
+
+  "pgConnection": {
+    "host": "127.0.0.1",
+    "user": "postgres",
+    "password": "gbplf13",
+    "database": "vcbr2022"
+  },
+  "sha256Secret": "Bldfnjrn%^hg"
+}

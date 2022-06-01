@@ -1,0 +1,115 @@
+.prog#pgm
+    .tower
+        .progTitleWr
+            .progTitle ПРОГРАММА
+            .progBtn(onclick="downloadFile('/images/programm.pdf', 'programm.pdf')")
+                .progBtnText Скачать программу
+                .progBtnIcon
+                    <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="32" height="32" rx="8" fill="#01B7E9"/>
+                    <path d="M22.2204 24.75H9.78043C9.43365 24.7359 9.09305 24.6535 8.77814 24.5075C8.46323 24.3616 8.18018 24.155 7.94519 23.8996C7.7102 23.6442 7.52788 23.3449 7.40867 23.019C7.28945 22.693 7.23568 22.3468 7.25043 22V19C7.25043 18.8011 7.32945 18.6103 7.4701 18.4697C7.61075 18.329 7.80152 18.25 8.00043 18.25C8.19934 18.25 8.39011 18.329 8.53076 18.4697C8.67141 18.6103 8.75043 18.8011 8.75043 19V22C8.72461 22.2969 8.81407 22.5924 9.00026 22.8251C9.18645 23.0579 9.45508 23.21 9.75043 23.25H22.2204C22.5158 23.21 22.7844 23.0579 22.9706 22.8251C23.1568 22.5924 23.2463 22.2969 23.2204 22V19C23.2204 18.8011 23.2995 18.6103 23.4401 18.4697C23.5808 18.329 23.7715 18.25 23.9704 18.25C24.1693 18.25 24.3601 18.329 24.5008 18.4697C24.6414 18.6103 24.7204 18.8011 24.7204 19V22C24.7504 22.6954 24.5045 23.3744 24.0363 23.8894C23.5681 24.4045 22.9155 24.7137 22.2204 24.75Z" fill="white"/>
+                    <path d="M16.0008 19.7508C15.9023 19.7513 15.8046 19.7321 15.7136 19.6943C15.6226 19.6565 15.5401 19.6009 15.4708 19.5308L11.4708 15.5308C11.3383 15.3886 11.2662 15.2006 11.2696 15.0063C11.2731 14.812 11.3518 14.6266 11.4892 14.4892C11.6266 14.3518 11.812 14.2731 12.0063 14.2696C12.2006 14.2662 12.3886 14.3383 12.5308 14.4708L16.0008 17.9408L19.4708 14.4708C19.613 14.3383 19.801 14.2662 19.9953 14.2696C20.1896 14.2731 20.375 14.3518 20.5124 14.4892C20.6499 14.6266 20.7286 14.812 20.732 15.0063C20.7354 15.2006 20.6633 15.3886 20.5308 15.5308L16.5308 19.5308C16.4616 19.6009 16.379 19.6565 16.288 19.6943C16.197 19.7321 16.0994 19.7513 16.0008 19.7508Z" fill="white"/>
+                    <path d="M16 19.75C15.8019 19.7474 15.6126 19.6676 15.4725 19.5275C15.3324 19.3874 15.2526 19.1981 15.25 19V8C15.25 7.80109 15.329 7.61032 15.4697 7.46967C15.6103 7.32902 15.8011 7.25 16 7.25C16.1989 7.25 16.3897 7.32902 16.5303 7.46967C16.671 7.61032 16.75 7.80109 16.75 8V19C16.7474 19.1981 16.6676 19.3874 16.5275 19.5275C16.3874 19.6676 16.1981 19.7474 16 19.75Z" fill="white"/>
+                    </svg>
+        .progRow
+            .progCell.first(style="flex: 50%;")
+                .progTime 9:30 - 10:50
+                .progItemFormat Панельная дискуссия
+                .progItemTitle ПРИОРИТЕТНЫЕ ЗАДАЧИ И ПРОЕКТЫ БАНКА РОССИИ 2022
+                .progUserTitle Модератор
+                .progUserWr
+                    include spk/skor
+                .progUserTitle Участники
+                .progUserWr
+                    include spk/tulin
+                .progUserWr
+                    include spk/udaeva
+                .progUserWr
+                    include spk/gabunia
+                .progBottomPlaceholder
+                .progItemBottom
+                    .progTime 10:50 – 11:00
+                    .progItemTitle
+                        include cofee
+                        div Перерыв
+
+
+            .progCell.last(style="flex: 50%;")
+                .progTime 11:00 – 12:20
+                .progItemFormat Панельная дискуссия
+                .progItemTitle БОРЬБА С МОШЕННИЧЕСТВОМ <br class="mobileHidden">&nbsp;
+                .progUserTitle Модератор
+                .progUserWr
+                        include spk/mamuta
+                .progUserTitle Участники
+                .progUserWr
+                    include spk/zubarev
+
+                .progUserWr
+                    include spk/lyah
+                .progUserWr
+                    include spk/riklina
+                .progBottomPlaceholder
+                .progItemBottom
+                        .progTime 12:20 – 13:00
+                        .progItemTitle
+                            include cofee
+                            div Перерыв
+        .progRow
+            .progCell.last(style="flex: 100%;")
+                .progTime 13:00 – 13:30
+                //.progItemFormat Открытие совещания
+                .progItemTitle ВЫСТУПЛЕНИЕ ПРЕДСЕДАТЕЛЯ БАНКА РОССИИ
+                .progUserWr.nab
+                    include spk/nabiulina
+                .progBottomPlaceholder
+                .progItemBottom
+                        .progTime 13:30 – 13:40
+                        .progItemTitle
+                            include cofee
+                            div Перерыв
+        .progRow
+            .progCell.first(style="flex: 50%;")
+                .progTime 13:40 – 15:00
+                .progItemFormat Панельная дискуссия
+                .progItemTitle РАБОТА ФИНАНСОВОЙ СИСТЕМЫ<br>В УСЛОВИЯХ САНКЦИОННЫХ<br> ОГРАНИЧЕНИЙ
+                .progUserTitle Модератор
+                .progUserWr
+                    include spk/zabotkin
+                .progUserTitle Участники
+                .progUserWr
+                    include spk/nabiulina
+                .progUserWr
+                    include spk/verhosh
+                .progUserWr
+                    include spk/vugin
+                .progBottomPlaceholder
+                .progItemBottom
+                        .progTime 15:00 – 15:10
+                        .progItemTitle
+                            include cofee
+                            div Перерыв
+            .progCell.last(style="flex: 50%;")
+                .progTime 15:10 – 16:30
+                .progItemFormat Панельная дискуссия
+                .progItemTitle НОВЫЕ ВВОДНЫЕ <br>ДЛЯ РЫНКА ТРУДА: <br>ГОССЕКТОР / БИЗНЕС
+                .progUserTitle Модератор
+                .progUserWr
+                    include spk/vester
+                .progUserTitle Участники
+                .progUserWr
+                    include spk/danina
+                .progUserWr
+                    include spk/terentyeva
+                .progBottomPlaceholder
+                .progItemBottom
+                    .progTime 16:30
+                    .progItemTitle
+                        <svg width="40" height="41" viewBox="0 0 40 41" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path opacity="0.1" d="M20 40.5C31.0457 40.5 40 31.5457 40 20.5C40 9.4543 31.0457 0.5 20 0.5C8.9543 0.5 0 9.4543 0 20.5C0 31.5457 8.9543 40.5 20 40.5Z" fill="#74777B"/>
+                        <path d="M27.5 11L18.2 21.225L15.5 19.175H14L18.2 26L29 11H27.5Z" fill="#74777B"/>
+                        </svg>
+
+
+
+                        div Завершение мероприятия

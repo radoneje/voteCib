@@ -1,0 +1,22 @@
+extends layout
+block content
+  .content#app
+    .Wr
+      .voteWr(v-for="v in vote")
+        .voteTitle(v-bind:class="{left:v.iscompl}") {{v.title}}
+        .votingBox(v-if="!v.iscompl")
+          .votingButton(v-for="item in v.answers" v-on:click="voiting(item)" v-bind:class="{active:checkVote(item)}")
+            .votingButtonTitle {{item.title}}
+        .voteComplBox(v-if="v.iscompl")
+          .votingItem(v-for="item in v.answers")
+            .votingItemTitle {{item.title}}
+            .votingItemRes
+              .votingItemResStart {{getPercent(v.total, item.count)}}
+              .votingItemResEnd(v-bind:style="{width:getPercent(v.total, item.count)}") &nbsp;
+  script(src="/javascripts/vue.min.js")
+  script(src="/javascripts/moment.min.js")
+  script.
+    var user = ""
+  script(src="/javascripts/mainScript.js")
+
+

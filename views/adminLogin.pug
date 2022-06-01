@@ -1,0 +1,23 @@
+extends layout
+
+block content
+    .content
+        .lTower
+            .LWr
+                form(METHOD="POST" action="/admin").lBox
+                    .lBoxTitle Регистрация
+                    .lBoxItem
+                        input.lBoxInput#f(type="text" name="l" placeholder="name" value=name )
+                    .lBoxItem
+                        input.lBoxInput#i(type="password" name="p" placeholder="pass")
+                    .lBoxItem
+                        #lBoxISubmit(onclick="document.querySelector('form').submit();")
+                            .lBoxISubmitTitle Войти
+                    #BoxError !{msg}
+                include elems/support
+
+    script.
+
+
+
+

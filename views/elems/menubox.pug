@@ -1,0 +1,8 @@
+.menuBox
+    .menuItem(onclick="document.getElementById('mobileMenuWr').classList.remove('show');scrollToElement('iframeBox')") Трансляция
+    .menuItem(onclick="document.getElementById('mobileMenuWr').classList.remove('show');scrollToElement('pgm')") Программа
+    //.menuItem(onclick="document.getElementById('mobileMenuWr').classList.remove('show');scrollToElement('spk')") Спикеры
+    .menuItem.lastMenuItem
+        .menuItemTitle#userName !{user.f+" "+user.i}
+        .menuItemButton(onclick="logout()") Выйти
+
