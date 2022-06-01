@@ -99,7 +99,7 @@
                     this.isLoaded=true;
                     this.status=d.data.status;
                     var to=parseInt(d.data.timeout);
-                    if(Number.isInteger(to) && to>5 && to<300)
+                    if(Number.isInteger(to) && to>2 && to<300)
                         this.timeout=to;
                     var inserted = false;
                    /* d.data.chat.forEach(c => {
