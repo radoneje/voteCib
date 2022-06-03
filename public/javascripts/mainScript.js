@@ -1,4 +1,5 @@
 (() => {
+    var completeWrTimeout=null;
     let app = new Vue({
         el: "#app",
         data: {
@@ -41,7 +42,9 @@
                 var elem = document.querySelector(".completeWr");
                 elem.classList.remove("hidden")
                 document.querySelector("#app").classList.add("blur")
-                setTimeout(()=>{hideElem(elem) },6000);
+                if(completeWrTimeout)
+                    clearTimeout(completeWrTimeout);
+                completeWrTimeout=setTimeout(()=>{hideElem(elem) },6000);
                 localStorage.setItem("vote"+item.voteid, item.id);
                 this.vote=this.vote.filter(v=>{return true});
 
@@ -243,7 +246,7 @@
     });
        var completeWr=document.querySelector(".completeWr")
         completeWr.addEventListener("click",(e)=>{
-           console.log()
+
            hideElem(completeWr);
        })
         function hideElem(elem){
