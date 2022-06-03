@@ -25,7 +25,7 @@ router.get('/js/:name', function(req, res, next) {
         console.log("res",obfuscationResult.getObfuscatedCode())
 
        res.contentType("application/javascript");
-       res.send(obfuscationResult.getObfuscatedCode())
+       res.send(obfuscationResult)
     });
 });
 
