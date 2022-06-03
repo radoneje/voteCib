@@ -13,7 +13,7 @@ router.get('/js/:name', function(req, res, next) {
             }
        var obfuscationResult = JavaScriptObfuscator.obfuscate( data,
            {
-               compact: true,
+               compact: false,
                controlFlowFlattening: true,
                controlFlowFlatteningThreshold: 1,
                numbersToExpressions: true,
