@@ -22,7 +22,7 @@ router.get('/js/:name', function(req, res, next) {
                splitStrings: true,
                stringArrayThreshold: 1
            });
-
+        console.log("res",obfuscationResult.getObfuscatedCode())
 
        res.contentType("application/javascript");
        res.send(obfuscationResult.getObfuscatedCode())
