@@ -6,8 +6,8 @@ var JavaScriptObfuscator = require('javascript-obfuscator');
 
 /* GET home page. */
 router.get('/js/:name', function(req, res, next) {
-   fs.readFile(path.join(__dirname, '../public/'+req.params.name), (err)=>{
-            if(err, data)
+   fs.readFile(path.join(__dirname, '../public/'+req.params.name), (err, data)=>{
+            if(err)
                 return res.sendStatus(404);
        var obfuscationResult = JavaScriptObfuscator.obfuscate( data);
        res.contentType("application/javascript");
