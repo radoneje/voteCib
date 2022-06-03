@@ -241,10 +241,13 @@
             //this.stat();
         }
     });
-       document.querySelector(".completeWr").addEventListener("click",(e)=>{
-           hideElem(e.target);
+       var completeWr=document.querySelector(".completeWr")
+        completeWr.addEventListener("click",(e)=>{
+           console.log()
+           hideElem(completeWr);
        })
         function hideElem(elem){
+
             elem.classList.add("hidden");document.querySelector("#app").classList.remove("blur")
         }
     /*document.querySelector(".up").addEventListener("click", () => {
