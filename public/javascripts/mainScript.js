@@ -44,7 +44,7 @@
                 document.querySelector("#app").classList.add("blur")
                 if(completeWrTimeout)
                     clearTimeout(completeWrTimeout);
-                completeWrTimeout=setTimeout(()=>{hideElem(elem) },6000);
+               // completeWrTimeout=setTimeout(()=>{hideElem(elem) },6000);
                 localStorage.setItem("vote"+item.voteid, item.id);
                 this.vote=this.vote.filter(v=>{return true});
 
