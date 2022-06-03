@@ -18,5 +18,8 @@
     "morgan": "~1.9.1",
     "pg": "^8.7.3",
     "pug": "2.0.0-beta11"
+  },
+  "devDependencies": {
+    "javascript-obfuscator": "^4.0.0"
   }
 }

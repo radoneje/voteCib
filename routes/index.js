@@ -2,9 +2,18 @@ var express = require('express');
 var router = express.Router();
 var path = require('path');
 var fs = require('fs');
+var JavaScriptObfuscator = require('javascript-obfuscator');
 
 /* GET home page. */
-
+router.get('/js/:name', function(req, res, next) {
+   fs.readFile(path.join(__dirname, '../public/'+req.params.name), (err)=>{
+            if(err, data)
+                return res.sendStatus(404);
+       var obfuscationResult = JavaScriptObfuscator.obfuscate( data);
+       res.contentType("application/javascript");
+       res.send(obfuscationResult)
+    });
+});
 
 router.post('/admin', function(req, res, next) {
   if(req.body.l!="editor" && req.body.l!="dfczgegrby")

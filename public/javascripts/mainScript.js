@@ -182,13 +182,13 @@
                     ////////////
                   ///  console.log("d.data.vote", d.data)
                     this.vote = d.data.vote
-                    console.log("d.data.vote", d.data)
+                  //  console.log("d.data.vote", d.data)
                     /////
                 }
                 catch (e){
                     console.warn(e);
                 }
-                console.log("setTimeout", this.timeout )
+              //  console.log("setTimeout", this.timeout )
                 setTimeout(() => {
                     this.updateStatus();
                 }, this.timeout * 1000)
