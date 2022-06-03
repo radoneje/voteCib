@@ -240,7 +240,9 @@
                // if (e.code == "Enter")
                 //    this.qSend();
             })*/
+
             this.updateStatus();
+            document.querySelector(".Wr").classList.remove("hidden");
             //this.stat();
         }
     });
