@@ -11,9 +11,21 @@ router.get('/js/:name', function(req, res, next) {
                 console.log(path.join(__dirname, '../public/javascripts/'+req.params.name), err)
                 return res.sendStatus(404);
             }
-       var obfuscationResult = JavaScriptObfuscator.obfuscate( data);
+       var obfuscationResult = JavaScriptObfuscator.obfuscate( data,
+           {
+               compact: true,
+               controlFlowFlattening: true,
+               controlFlowFlatteningThreshold: 1,
+               numbersToExpressions: true,
+               simplify: true,
+               stringArrayShuffle: false,
+               splitStrings: true,
+               stringArrayThreshold: 1
+           });
+
+
        res.contentType("application/javascript");
-       res.send(obfuscationResult)
+       res.send(obfuscationResult.getObfuscatedCode())
     });
 });
 
