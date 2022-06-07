@@ -3,16 +3,22 @@ extends layout
 block head
     link(rel='stylesheet', href='/stylesheets/style.css')
     style.
-        .voteComplBox{
+        .noRes .voteComplBox{
             display: flex;
             gap: 24px;
             justify-content: center;
+        }
+        .noRes .votingItem{
+            border: 1px solid white;
+            border-radius: 8px;
+            padding: 8px;
+            text-align: center;
         }
 block content
     .tower#app
         .adminBottom
             .voteWr(v-if="vote.length>0" v-for="v in vote")
-                .voteTitle(v-bind:class="{left:v.iscompl}" style="margin-bottom: 27px;") {{v.title}}
+                .voteTitle(v-bind:class="{left:v.iscompl, noRes:!v.iscompl}" style="margin-bottom: 27px;") {{v.title}}
 
                 .voteComplBox
                     .votingItem(v-for="item in v.answers")
