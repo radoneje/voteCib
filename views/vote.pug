@@ -6,16 +6,16 @@ block head
 block content
     .tower#app
         .adminBottom
-            .voteWr(v-if="vote.length>0" )
-                .voteTitle(v-bind:class="{left:vote[0].iscompl}") {{vote[0].title}}
+            .voteWr(v-if="vote.length>0" v-for="v in vote")
+                .voteTitle(v-bind:class="{left:v.iscompl}") {{v.title}}
 
                 .voteComplBox
-                    .votingItem(v-for="item in vote[0].answers")
+                    .votingItem(v-for="item in v.answers")
                         .votingItemTitle {{item.title}}
-                        .votingItemRes
+                        .votingItemRes(v-if="v.iscompl")
                             .votingItemResStart &nbsp;
-                                span(v-if="vote[0].iscompl") {{getPercent(vote[0].total, item.count)}}
-                            .votingItemResEnd(v-if="vote[0].iscompl" v-bind:style="{width:getPercent(vote[0].total, item.count)}") &nbsp;
+                                span(v-if="v.iscompl") {{getPercent(v.total, item.count)}}
+                            .votingItemResEnd(v-if="v.iscompl" v-bind:style="{width:getPercent(vote[0].total, item.count)}") &nbsp;
 
 
 
