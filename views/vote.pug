@@ -17,8 +17,8 @@ block head
 block content
     .tower#app
         .adminBottom
-            .voteWr(v-if="vote.length>0" v-for="v in vote")
-                .voteTitle(v-bind:class="{left:v.iscompl, noRes:!v.iscompl}" style="margin-bottom: 27px;") {{v.title}}
+            .voteWr(v-if="vote.length>0" v-for="v in vote" v-bind:class="{ noRes:!v.iscompl}")
+                .voteTitle(v-bind:class="{left:v.iscompl}" style="margin-bottom: 27px;") {{v.title}}
 
                 .voteComplBox
                     .votingItem(v-for="item in v.answers")
