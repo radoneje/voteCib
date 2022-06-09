@@ -38,7 +38,7 @@ block head
 block content
     .tower#app
         .adminBottom
-            .voteWr.VoteImg(v-if="vote.length==0")
+            //.voteWr.VoteImg(v-if="vote.length==0")
                 img(src="/images/qr.jpg")
             .voteWr(v-if="vote.length>0" v-for="v in vote" v-bind:class="{ noRes:!v.iscompl}")
                 .voteTitle(v-bind:class="{left:v.iscompl}" style="margin-bottom: 27px;") {{v.title}}
