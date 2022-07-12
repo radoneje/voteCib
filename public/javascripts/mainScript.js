@@ -9,6 +9,10 @@
             qText: "",
             chatText: [],
             isLoading: false,
+            tags:[],
+            tagAnswer:{},
+            tagAnswers:{},
+            Uanswers:{},
             vote:[],
             status:{},
             isLoaded:false,
@@ -16,7 +20,65 @@
             logTimeout:60
         },
         methods: {
+            getCloud:async function(item){
+               if(document.getElementById("cloud"+item.id))
+                   return;
+               setTimeout(async ()=>{
+                    var dt= await axios.get("/api/tagRes/"+item.id);
+                    chart = anychart.tagCloud(dt.data);
+                    chart.container("cloud"+item.id);
+                    chart.draw();
+                    },0)
+                return "";
+            },
+            tagInputKeyPress:function (e, item){
+                if(e.keyCode==13){
+                    this.tagSend(item);
+                    return false;
+                }
+            },
+            tagSend:async function(item, e){
 
+                if(this.Uanswers['tags'+item.id])
+                    return;
+                if(this.tagAnswer.length==0){
+                    document.getElementById('taginput'+item.id).focus();
+                    return;
+                }
+
+                /*var elem=document.getElementById("btn"+item.id);
+               var preText='';
+               if(elem) {
+                  preText=elem.innerHTML;
+                   elem.innerHTML="Отправляю..."
+                   document.getElementById('taginput'+item.id).setAttribute("readonly", "true")
+                   setTimeout(()=>{
+                       var elem=document.getElementById("btn"+item.id);
+                       if(elem) {
+                           if(!this.Uanswers['tags'+item.id]) {
+                               elem.innerHTML = preText;
+
+                               document.getElementById('taginput' + item.id).removeAttribute("readonly");
+                               document.getElementById("taginput" + item.id).focus();
+                           }
+                       }
+                   },4000);
+                }*/
+                this.Uanswers['tags'+item.id]=this.tagAnswer['tags'+item.id];
+                let r=await axios.post("/api/tagSend",{id:item.id,answer:this.tagAnswer['tags'+item.id]})
+                if(r.data<=0)
+                    this.Uanswers['tags'+item.id]=null;
+                else{
+                    var elem = document.querySelector(".completeWr");
+                    elem.classList.remove("hidden")
+                    elem.querySelector(".completeSubText").classList.add("hidden")
+                    document.querySelector("#app").classList.add("blur")
+                    if(completeWrTimeout)
+                        clearTimeout(completeWrTimeout);
+                    completeWrTimeout=setTimeout(()=>{hideElem(elem) },6000);
+                }
+                localStorage.setItem("Uanswers", JSON.stringify(this.Uanswers))
+            },
             getCalcPercent:function(total, count){
 
                 var perc = getPercent(total, count);
@@ -41,6 +103,7 @@
                 await axios.post("/api/Vote", {id: item.id});
                 var elem = document.querySelector(".completeWr");
                 elem.classList.remove("hidden")
+                elem.querySelector(".completeSubText").classList.remove("hidden")
                 document.querySelector("#app").classList.add("blur")
                 if(completeWrTimeout)
                     clearTimeout(completeWrTimeout);
@@ -105,6 +168,7 @@
                     //var d = await axios.get("/vcbr/status/");
                     this.isLoaded=true;
                     this.status=d.data.status;
+                    this.tags=d.data.tags.filter(t=>{return t.isactive});
                     var to=parseInt(d.data.timeout);
                     if(Number.isInteger(to) && to>2 && to<300)
                         this.timeout=to;
@@ -241,6 +305,8 @@
                 //    this.qSend();
             })*/
 
+            let json= localStorage.getItem("Uanswers")
+            this.Uanswers=json? JSON.parse(json):{};
             this.updateStatus();
             document.querySelector(".Wr").classList.remove("hidden");
             //this.stat();

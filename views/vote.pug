@@ -3,6 +3,11 @@ extends layout
 block head
     link(rel='stylesheet', href='/stylesheets/style.css')
     style.
+        .cloudContainer{
+            border-radius: 24px;
+            height: 800px;
+            overflow: hidden;
+        }
         .mLeft{
             margin-left: 100px;
         }
@@ -40,6 +45,11 @@ block content
         .adminBottom
             //.voteWr.VoteImg(v-if="vote.length==0")
                 img(src="/images/qr.jpg")
+            .voteWr(v-for="tag in tags")
+                .voteTitle(v-bind:class="{left:tag.iscompl}") {{tag.title}}
+                div(v-if="tag.iscompl" style="margin-top:24px;")
+                        .cloudContainer(:id="'cloud'+tag.id")
+                        .tst(style="display:none") {{getCloud(tag)}};
             .voteWr(v-if="vote.length>0" v-for="v in vote" v-bind:class="{ noRes:!v.iscompl}")
                 .voteTitle(v-bind:class="{left:v.iscompl}" style="margin-bottom: 27px;") {{v.title}}
 
@@ -50,12 +60,14 @@ block content
                             .votingItemResStart &nbsp;
                                 span(v-if="v.iscompl") {{getPercent(v.total, item.count)}}
                             .votingItemResEnd(v-if="v.iscompl" v-bind:style="{width:getPercent(vote[0].total, item.count)}") &nbsp;
-            .QrWr(v-if="vote.length==1")
+            .QrWr(v-if="vote.length==1 || tags.length==1")
                 img(src="/images/qr.jpg")
 
 
     script(src="/javascripts/vue.min.js")
     script(src="/javascripts/moment.min.js")
+    <script src="https://cdn.anychart.com/releases/8.11.0/js/anychart-core.min.js"></script>
+    <script src="https://cdn.anychart.com/releases/8.11.0/js/anychart-tag-cloud.min.js"></script>
     style.
         body{width:1920px;height:1280px;overflow: hidden}
         .voteWr{position: inherit; border-radius:40px;}
@@ -84,9 +96,21 @@ block content
         var app = new Vue({
             el: "#app",
             data: {
-                vote: []
+                vote: [],
+                tags:[]
             },
             methods: {
+                getCloud: async function (item) {
+                    if (document.getElementById("cloud" + item.id))
+                        return;
+                    setTimeout(async () => {
+                        var dt = await axios.get("/api/tagRes/" + item.id);
+                        chart = anychart.tagCloud(dt.data);
+                        chart.container("cloud" + item.id);
+                        chart.draw();
+                    }, 0)
+                    return "";
+                },
                 getCalcPercent: function (total, count) {
 
                     var perc = getPercent(total, count);
@@ -103,6 +127,7 @@ block content
                         var d = await axios.get("/status/");
 
                         this.vote = d.data.vote
+                        this.tags=d.data.tags.filter(t=>{return t.isactive});
                         console.log(this.vote)
                     }
                     catch (e){

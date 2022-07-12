@@ -48,6 +48,12 @@ router.get('/admin', function(req, res, next) {
 router.get("/status", async (req, res)=>{
     let chat=await req.knex.select("*").from("v_chat").orderBy("date", );
     let q=await req.knex.select("*").from("v_q").orderBy("date", );
+    let tags=await req.knex.select("*").from("t_tags").where({isDeleted:false}).orderBy("id", "desc");
+    for(let tag of tags){
+        let a=await req.knex("t_tagsanswers").count('id as count').where({tagsid:tag.id});
+        tag.count=a[0].count;
+    }
+    console.log("tags", tags)
 
     let count=50-chat.length;
     if(count<0)
@@ -74,7 +80,7 @@ router.get("/status", async (req, res)=>{
       console.warn(e)
     }
 
-  res.json({chat, q, vote, status, timeout});
+  res.json({chat, q, vote, tags, status, timeout});
 })
 router.get('/vote', function(req, res, next) {
     res.render('vote', );

@@ -8,12 +8,14 @@
             qText: "",
             chatText: [],
             users: [],
+            tags:[],
             isLoading: false,
             userF: "",
             userI: "",
             userCode: 0,
             votes: [],
             voteTitle: "",
+            tagTitle: "",
             status:{id:1,q:false},
             logs:{users:[], logs:[]},
             isLogShow:false,
@@ -94,6 +96,20 @@
                 var r = await axios.post("/api/deleteVote", {id: item.id});
                 this.votes = this.votes.filter(v => v.id != r.data.id);
             },
+            resultTag: async function (item) {
+                var r = await axios.post("/api/resultTag", {iscompl: !item.iscompl, id: item.id});
+                item.iscompl = r.data.iscompl;
+            },
+            startTag: async function (item) {
+                var r = await axios.post("/api/startTag", {isactive: !item.isactive, id: item.id});
+                item.isactive = r.data.isactive;
+            },
+            deleteTag: async function (item) {
+                if (!confirm("Удалить облако?"))
+                    return;
+                var r = await axios.post("/api/deleteTag", {id: item.id});
+                this.tags = this.tags.filter(v => v.id != r.data.id);
+            },
             addVote: async function () {
                 if (this.voteTitle.length == 0)
                     return;
@@ -107,6 +123,20 @@
                     this.voteTitle = "";
                 }, 0)
             },
+            addTag: async function () {
+                if (this.tagTitle.length == 0)
+                    return;
+                var r = await axios.post("/api/addTag", {title: this.tagTitle});
+                this.tags = r.data;
+                console.log(this.tags);
+                setTimeout(() => {
+                    var elem = document.getElementById("tag" + r.data.id);
+                    console.log(elem, elem.offsetTop);
+                    elem.parentNode.scrollTop = elem.offsetTop - 60 - elem.clientHeight;
+                    this.tagTitle = "";
+                }, 0)
+            },
+
             addUser: async function () {
 
                 if (this.userF.length == 0 || this.userI.length == 0)
@@ -189,6 +219,7 @@
                     var d = await axios.get("/status/");
 
                     this.status = d.data.status;
+                    this.tags=d.data.tags;
                     var inserted = false;
                     var focused = false;
                     document.querySelectorAll(".qItem textarea").forEach(e => {
