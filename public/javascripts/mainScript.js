@@ -30,6 +30,7 @@
                    chart.fromAngle(0);
                    chart.toAngle(0);
                    chart.anglesCount(5);
+                   chart.scale(anychart.scales.log());
                     chart.draw();
                     },0)
                 return "";
