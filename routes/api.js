@@ -166,15 +166,16 @@ router.post("/addTag", checkAdmin, async (req, res, next) => {
 router.post("/tagSend", async (req, res, next) => {
     let id= req.body.id;
     let words=req.body.answer.replace(/;/gi,",").split(",");
-    words.forEach(w=>{
-        w= w.replace(/^\s+|\s+$/g, "").toUpperCase().trim();
-    });
-    words=words.filter(w=>{
-        return w.length>0
-    })
+
     for(var w of words){
-        var v = await req.knex("t_tagsanswers")
-            .insert({val:w, tagsid:id}, "*")
+        if(w) {
+            w = w.replace(/\s+|\s+$/ig, "").toUpperCase().trim();
+            if (w.length > 0) {
+                console.log("INSERT" + " '" + w + "'")
+                var v = await req.knex("t_tagsanswers")
+                    .insert({val: w, tagsid: id}, "*")
+            }
+        }
     }
 
     res.json(words.length);
@@ -187,10 +188,11 @@ router.get("/tagRes/:id", async (req, res, next) => {
     r.forEach(v=>{
         let val=v.val;
         let find=false;
-        arr.forEach(a=>{
-            if(a.x==val){
+        arr.forEach(aa=>{
+            console.log(aa.x==val, "'"+aa.x+"'", "'"+val+"'" )
+            if(aa.x==val){
                 find=true;
-                a.value++;
+                aa.value++;
             }
         })
         if(!find)
@@ -229,6 +231,16 @@ router.post("/deleteTag", checkAdmin, async (req, res, next) => {
     let r=await req.knex("t_tags").update({isDeleted:true},"*").where({id:req.body.id});
     res.json({id:r[0].id});
 });
+router.post("/clearTag", checkAdmin, async (req, res, next) => {
+    let r=await req.knex("t_tagsanswers").where({tagsid:req.body.id}).del();
+    res.json(0);
+});
+router.post("/clearVote", checkAdmin, async (req, res, next) => {
+    let r=await req.knex("t_voteanswers").update({count:0}).where({voteid:req.body.id});
+    res.json(0);
+});
+
+
 
 router.post("/startTag", checkAdmin, async (req, res, next) => {
     let r=await req.knex("t_tags").update({isactive:req.body.isactive},"*").where({id:req.body.id});

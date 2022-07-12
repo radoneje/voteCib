@@ -100,9 +100,21 @@
                 var r = await axios.post("/api/deleteVote", {id: item.id});
                 this.votes = this.votes.filter(v => v.id != r.data.id);
             },
+
+            clearVote: async function (item) {
+                if (!confirm("Очистить результаты голосования?"))
+                    return;
+                var r = await axios.post("/api/clearVote", {id: item.id});
+
+            },
             resultTag: async function (item) {
                 var r = await axios.post("/api/resultTag", {iscompl: !item.iscompl, id: item.id});
                 item.iscompl = r.data.iscompl;
+            },
+            clearTag: async function (item) {
+                if(confirm("Удалить все результаты?"))
+                var r = await axios.post("/api/clearTag", {id: item.id});
+
             },
             startTag: async function (item) {
                 var r = await axios.post("/api/startTag", {isactive: !item.isactive, id: item.id});

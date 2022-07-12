@@ -119,6 +119,7 @@ block content
                                 .button(v-on:click="resultVote(item)" v-if="!item.iscompl") Показан процесс
                                 .button.green(v-on:click="resultVote(item)" v-if="item.iscompl") Показаны результаты
                                 .button(v-on:click="addAnswer(item)") Добавить ответ
+                                .button.red(v-on:click="clearVote(item)") Очистить результаты?
                                 .button.red(v-on:click="deleteVote(item)") Удалить голосование
                     .sendWr
                         .sendBox
@@ -159,6 +160,7 @@ block content
                                 .button.green(v-on:click="startTag(item)" v-if="item.isactive") Остановить
                                 .button(v-on:click="resultTag(item)" v-if="!item.iscompl") Показан процесс
                                 .button.green(v-on:click="resultTag(item)" v-if="item.iscompl") Показаны результаты
+                                .button.red(v-on:click="clearTag(item)") Очистить результаты?
                                 .button.red(v-on:click="deleteTag(item)") Удалить облако?
                     .sendWr
                         .sendBox
