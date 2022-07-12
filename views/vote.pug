@@ -44,12 +44,29 @@ block head
             border-radius: 16px;
             width:800px;
         }
+        .QrWr2{
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            position: fixed;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .QrWr2Box{
+            width: 30%;
+        }
+        .QrWr2Box img{
+            width: 100%;
+        }
 
 block content
     .tower#app
         .adminBottom
             .QrWr2(v-if="vote.length==0 && tags.length==0")
-                img(src="/images/qr.jpg")
+                .QrWr2Box
+                    img(src="/images/qr.jpg")
             //.voteWr.VoteImg(v-if="vote.length==0")
                 img(src="/images/qr.jpg")
             .voteWr(v-for="tag in tags")
