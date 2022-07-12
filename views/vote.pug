@@ -48,6 +48,8 @@ block head
 block content
     .tower#app
         .adminBottom
+            .QrWr2(v-if="vote.length==0 && tags.length==0")
+                img(src="/images/qr.jpg")
             //.voteWr.VoteImg(v-if="vote.length==0")
                 img(src="/images/qr.jpg")
             .voteWr(v-for="tag in tags")
@@ -67,8 +69,7 @@ block content
                             .votingItemResEnd(v-if="v.iscompl" v-bind:style="{width:'calc('+getPercent(vote[0].total, item.count)+' - 178px)'}") &nbsp;
             .QrWr(v-if="vote.length==1 || tags.length==1")
                 img(src="/images/qr.jpg")
-            .QrWr2(v-if="vote.length==0 && tags.length==0")
-                img(src="/images/qr.jpg")
+
 
 
     script(src="/javascripts/vue.min.js")
