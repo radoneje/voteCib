@@ -64,7 +64,7 @@ block content
                         .votingItemRes(v-if="v.iscompl")
                             .votingItemResStart &nbsp;
                                 span(v-if="v.iscompl") {{getPercent(v.total, item.count)}}
-                            .votingItemResEnd(v-if="v.iscompl" v-bind:style="{width:getPercent(vote[0].total, item.count)}") &nbsp;
+                            .votingItemResEnd(v-if="v.iscompl" v-bind:style="{width:'calc('+getPercent(vote[0].total, item.count)+' - 178px)'}") &nbsp;
             .QrWr(v-if="vote.length==1 || tags.length==1")
                 img(src="/images/qr.jpg")
 
@@ -98,7 +98,7 @@ block content
             padding: 8px 0;
         }
         .votingItemResStart{
-            width:175px;
+            width:178px;
         }
     script.
         var app = new Vue({
