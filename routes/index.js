@@ -53,7 +53,6 @@ router.get("/status", async (req, res)=>{
         let a=await req.knex("t_tagsanswers").count('id as count').where({tagsid:tag.id});
         tag.count=a[0].count;
     }
-    console.log("tags", tags)
 
     let count=50-chat.length;
     if(count<0)

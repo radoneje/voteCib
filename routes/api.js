@@ -215,6 +215,11 @@ router.post("/startVote", checkAdmin, async (req, res, next) => {
     let r=await req.knex("t_vote").update({isactive:req.body.isactive},"*").where({id:req.body.id});
     res.json(r[0]);
 });
+
+router.post("/multyVote", checkAdmin, async (req, res, next) => {
+    let r=await req.knex("t_vote").update({multy:req.body.multy},"*").where({id:req.body.id});
+    res.json(r[0]);
+});
 router.post("/resultVote", checkAdmin, async (req, res, next) => {
     let r=await req.knex("t_vote").update({iscompl:req.body.iscompl},"*").where({id:req.body.id});
     res.json(r[0]);
@@ -295,7 +300,7 @@ router.post("/vote", /*checkLogin,*/ async (req, res)=>{
 router.post("/changeStatus", checkAdmin, async (req, res, next) => {
 
     let r= await req.knex("t_status").update(req.body, "*");
-    console.log(req.body, r[0]);
+
     res.json(r[0])
 })
 router.post("/stat", async (req, res, next) => {

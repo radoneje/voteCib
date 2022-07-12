@@ -23,9 +23,11 @@ block content
       .voteWr(v-for="v in vote")
         .voteTitle(v-bind:class="{left:v.iscompl}") {{v.title}}
         .votingBox(v-if="!v.iscompl")
-          .votingButton(v-for="item in v.answers" v-on:click="voiting(item)" v-bind:class="{active:checkVote(item)}")
+          .votingButton(v-for="item in v.answers" v-on:click="voiting(item, v)" v-bind:class="{active:checkVote(item, v)}")
             .votingButtonTitle {{item.title}}
               .votingButtonSubTitle(v-if="item.subTitle && item.subTitle.length>0") {{item.subTitle}}
+        .votingMessage(v-if="!v.iscompl & !v.multy") Можно выбрать один вариант
+        .votingMessage(v-if="!v.iscompl & v.multy") Можно выбрать несколько вариантов
         .voteComplBox(v-if="v.iscompl")
           .votingItem(v-for="item in v.answers")
             .votingItemTitle {{item.title}}

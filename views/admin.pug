@@ -103,6 +103,10 @@ block content
                     .qWr#voteBox
                         .qItem(v-for="item in votes" v-if="votes.length>0" :id="'vote'+item.id")
                             .qItemUser {{item.title}}
+                                .buttonGroup( style="margin-top:24px;")
+                                    .button(v-on:click="multyVote(item)" v-if="!item.multy") Только один вариант
+                                    .button.green(v-on:click="multyVote(item)" v-if="item.multy") Возможно много вариантов
+
                                 .qVoteAnswerWr
                                     .qVoteAnwerItem(v-for="answ in item.answers")
                                         .aanswCount  {{getAnswProc(item, answ.count)}} / {{answ.count}}

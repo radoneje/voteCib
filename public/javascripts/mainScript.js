@@ -90,16 +90,41 @@
                 var perc = (parseFloat(count) / parseFloat(total) * 100);
                 return perc.toPrecision(4) + "%"
             },
-            voiting:async function(item){
+            voiting:async function(item, v){
 
-                var store=localStorage.getItem("vote"+item.voteid);
-                if(store==item.id)
-                    return
+                var store=[];
+                   var json= localStorage.getItem("vote"+item.voteid);
+                   if(json)
+                       store=JSON.parse(json)
+                console.log("v.multy",v.multy, store)
+                let oldVote= store.filter(s=>{return s==item.id});
+                console.log("oldVote",oldVote)
 
-                if(store) {
+                if(! v.multy){
+                        for(let o of store) {
+                            if(o==item.id)
+                                return
+                            await axios.post("/api/reVote", {id: o});
+                            store=store.filter(s=>{return s!=o});
+                            localStorage.setItem("vote" + v.id, JSON.stringify(store));
+                            this.vote=this.vote.filter(ff=>{return true})
+                        }
 
-                    await axios.post("/api/reVote", {id: store});
                 }
+                else
+                {
+                    for(let o of store) {
+                        if(o==item.id)
+                        {
+                            store=store.filter(s=>{return s!=o});
+                            localStorage.setItem("vote" + v.id, JSON.stringify(store));
+                            this.vote=this.vote.filter(ff=>{return true})
+                            await axios.post("/api/reVote", {id: o});
+                            return
+                        }
+                    }
+                }
+
                 await axios.post("/api/Vote", {id: item.id});
                 var elem = document.querySelector(".completeWr");
                 elem.classList.remove("hidden")
@@ -108,13 +133,20 @@
                 if(completeWrTimeout)
                     clearTimeout(completeWrTimeout);
                 completeWrTimeout=setTimeout(()=>{hideElem(elem) },6000);
-                localStorage.setItem("vote"+item.voteid, item.id);
+
+                store.push(item.id)
+                localStorage.setItem("vote"+item.voteid, JSON.stringify(store));
                 this.vote=this.vote.filter(v=>{return true});
 
             },
-            checkVote:function(item){
-                var store=localStorage.getItem("vote"+item.voteid);
-                return store==item.id;
+            checkVote:function(item, v){
+                var json=localStorage.getItem("vote"+item.voteid);
+                if(! json)
+                    return false;
+               // if(!v.multy )
+                //    return true;
+                let store=JSON.parse(json)
+                return store.filter(s=>{return s==item.id}).length>0;
             },
             chatSend: async function () {
                 if (this.chatText.length < 1)

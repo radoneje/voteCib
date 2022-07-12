@@ -90,6 +90,10 @@
                 var r = await axios.post("/api/startVote", {isactive: !item.isactive, id: item.id});
                 item.isactive = r.data.isactive;
             },
+            multyVote: async function (item) {
+                var r = await axios.post("/api/multyVote", {multy: !item.multy, id: item.id});
+                item.multy = r.data.multy;
+            },
             deleteVote: async function (item) {
                 if (!confirm("Удалить голосование?"))
                     return;
