@@ -169,7 +169,7 @@ router.post("/tagSend", async (req, res, next) => {
 
     for(var w of words){
         if(w) {
-            w = w.replace(/\s+|\s+$/ig, "").toUpperCase().trim();
+            w = w.replace(/^\s+|\s+$/ig, "").toUpperCase().trim();
             if (w.length > 0) {
                 console.log("INSERT" + " '" + w + "'")
                 var v = await req.knex("t_tagsanswers")
