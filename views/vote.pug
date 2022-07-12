@@ -107,6 +107,9 @@ block content
                         var dt = await axios.get("/api/tagRes/" + item.id);
                         chart = anychart.tagCloud(dt.data);
                         chart.container("cloud" + item.id);
+                        chart.fromAngle(0);
+                        chart.toAngle(0);
+                        chart.anglesCount(5);
                         chart.draw();
                     }, 0)
                     return "";
