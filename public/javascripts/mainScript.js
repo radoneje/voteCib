@@ -100,9 +100,9 @@
                    var json= localStorage.getItem("vote"+item.voteid);
                    if(json)
                        store=JSON.parse(json)
-                console.log("v.multy",v.multy, store)
+
                 let oldVote= store.filter(s=>{return s==item.id});
-                console.log("oldVote",oldVote)
+
 
                 if(! v.multy){
                         for(let o of store) {
@@ -130,18 +130,34 @@
                 }
 
                 await axios.post("/api/Vote", {id: item.id});
-                var elem = document.querySelector(".completeWr");
-                elem.classList.remove("hidden")
-                elem.querySelector(".completeSubText").classList.remove("hidden")
-                document.querySelector("#app").classList.add("blur")
-                if(completeWrTimeout)
-                    clearTimeout(completeWrTimeout);
-                completeWrTimeout=setTimeout(()=>{hideElem(elem) },6000);
+                if(!v.multy) {
+                    showNotify();/*
+                    var elem = document.querySelector(".completeWr");
+                    elem.classList.remove("hidden")
+                    elem.querySelector(".completeSubText").classList.remove("hidden")
+                    document.querySelector("#app").classList.add("blur")
+                    if (completeWrTimeout)
+                        clearTimeout(completeWrTimeout);
+                    completeWrTimeout = setTimeout(() => {
+                        hideElem(elem)
+                    }, 6000);*/
+                }
+                else{
+                    var elem = document.getElementById('votebtn'+v.id);
+                    if(elem)
+                     elem.classList.remove('hidden')
+
+                }
 
                 store.push(item.id)
+                console.log("store",store)
                 localStorage.setItem("vote"+item.voteid, JSON.stringify(store));
                 this.vote=this.vote.filter(v=>{return true});
 
+            },
+            multyVote:function(item, e){
+                e.target.classList.add('hidden');
+                showNotify();
             },
             checkVote:function(item, v){
                 var json=localStorage.getItem("vote"+item.voteid);
@@ -357,6 +373,17 @@
 
             elem.classList.add("hidden");document.querySelector("#app").classList.remove("blur")
         }
+        function showNotify(){
+            var elem = document.querySelector(".completeWr");
+            elem.classList.remove("hidden")
+            elem.querySelector(".completeSubText").classList.remove("hidden")
+            document.querySelector("#app").classList.add("blur")
+            if (completeWrTimeout)
+                clearTimeout(completeWrTimeout);
+            completeWrTimeout = setTimeout(() => {
+                hideElem(elem)
+            }, 6000);
+        }
     /*document.querySelector(".up").addEventListener("click", () => {
         //document.body.scrollTop = document.documentElement.scrollTop = 0;
         window.scrollTo({top: 0, behavior: 'smooth'});
@@ -406,6 +433,7 @@ function scrollToSmoothly(pos, time) {
             window.scrollTo(0, pos);
         }
     });
+
 }
 function downloadFile(src, name){
     console.log(src)
@@ -416,5 +444,6 @@ function downloadFile(src, name){
     link.dispatchEvent(new MouseEvent('click'));
 
 }
+
 
 

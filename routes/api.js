@@ -159,6 +159,11 @@ router.post("/addVote", checkAdmin, async (req, res, next) => {
     r=await req.knex("t_vote").insert(req.body, "*");
     res.json({id:r[0].id, list:await getVotes(req)});
 });
+
+router.post("/voteTitleChange", checkAdmin, async (req, res, next) => {
+    r=await req.knex("t_vote").update({title:req.body.title}, "*").where({id:req.body.id});
+    res.json(r[0]);
+});
 router.post("/addTag", checkAdmin, async (req, res, next) => {
     let r=await req.knex("t_tags").insert(req.body, "*");
     res.json({id:r[0].id, list:await getTags(req)});

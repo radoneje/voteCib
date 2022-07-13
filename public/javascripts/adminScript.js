@@ -101,6 +101,12 @@
                 this.votes = this.votes.filter(v => v.id != r.data.id);
             },
 
+            voteTitleChange: async function (item) {
+
+                var r = await axios.post("/api/voteTitleChange", item);
+
+            },
+
             clearVote: async function (item) {
                 if (!confirm("Очистить результаты голосования?"))
                     return;

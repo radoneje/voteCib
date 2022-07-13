@@ -8,26 +8,27 @@ block content
         .voteTitle() Сейчас нет активного голосования
       .voteWr(v-for="tag in tags")
         .voteTitle(v-bind:class="{left:tag.iscompl}") {{tag.title}}
-          div(v-if="!tag.iscompl")
+          .tagBody(v-if="!tag.iscompl")
             .votingText
-              input(v-if="!Uanswers['tags'+tag.id]" :id="'taginput'+tag.id" placeholder="Ваши ответы через запятую" v-on:keypress="tagInputKeyPress($event, tag)" v-model="tagAnswer['tags'+tag.id]")
-              input(v-if="Uanswers['tags'+tag.id]" :id="'taginput'+tag.id" placeholder="Ваши ответы через запятую" v-model="Uanswers['tags'+tag.id]" readonly="readonly")
-            .votingButton(v-on:click="tagSend(tag, $event)" v-bind:class="{active:Uanswers['tags'+tag.id]}")
+              input(v-if="!Uanswers['tags'+tag.id]" :id="'taginput'+tag.id" placeholder="Ваш ответ" v-on:keypress="tagInputKeyPress($event, tag)" v-model="tagAnswer['tags'+tag.id]" maxlength="30 ")
+              input(v-if="Uanswers['tags'+tag.id]" :id="'taginput'+tag.id" placeholder="Ваш ответ" v-model="Uanswers['tags'+tag.id]" readonly="readonly")
+            .votingButton(v-on:click="tagSend(tag, $event)" v-bind:class="{active:Uanswers['tags'+tag.id]}" style="max-width: 300px;margin: 0 auto")
               .votingButtonTitle(v-show="!Uanswers['tags'+tag.id]" :id="'btn'+tag.id") Отправить ответ
               .votingButtonTitle(v-show="Uanswers['tags'+tag.id]")  Ваш ответ принят
               .votingButtonSendingStatusWr
-          div(v-if="tag.iscompl" style="margin-top:24px;")
+          .tagBody(v-if="tag.iscompl" style="margin-top:24px;")
             .cloudContainer(:id="'cloud'+tag.id")
             .tst(style="display:none") {{getCloud(tag)}};
 
       .voteWr(v-for="v in vote")
         .voteTitle(v-bind:class="{left:v.iscompl}") {{v.title}}
-        .votingBox(v-if="!v.iscompl")
+        .votingBox(v-if="!v.iscompl" v-bind:class="{multy:v.multy}")
           .votingButton(v-for="item in v.answers" v-on:click="voiting(item, v)" v-bind:class="{active:checkVote(item, v)}")
             .votingButtonTitle {{item.title}}
               .votingButtonSubTitle(v-if="item.subTitle && item.subTitle.length>0") {{item.subTitle}}
         .votingMessage(v-if="!v.iscompl & !v.multy") Можно выбрать один вариант
         .votingMessage(v-if="!v.iscompl & v.multy") Можно выбрать несколько вариантов
+        .votingConfirm.hidden(:id="'votebtn'+v.id" v-if="!v.iscompl & v.multy" v-on:click="multyVote(v, $event)" ) Голосовать
         .voteComplBox(v-if="v.iscompl")
           .votingItem(v-for="item in v.answers")
             .votingItemTitle {{item.title}}
@@ -40,7 +41,7 @@ block content
         <metadata> Svg Vector Icons : http://www.onlinewebfonts.com/icon </metadata>
         <g><path fill="#ffffff" d="M951.5,309.3c-24.7-58.4-60-110.7-105-155.7c-45-45-97.4-80.3-155.7-105C630.3,23,566.1,10,500,10c-66.1,0-130.3,13-190.7,38.5c-58.4,24.7-110.8,60-155.7,105c-45,45-80.3,97.4-105,155.7C23,369.7,10,433.9,10,500c0,66.1,13,130.3,38.5,190.7c24.7,58.4,60,110.7,105,155.7c45,45,97.4,80.3,155.7,105C369.7,977,433.9,990,500,990c66.1,0,130.3-13,190.7-38.5c58.4-24.7,110.8-60,155.7-105c45-45,80.3-97.4,105-155.7C977,630.3,990,566.1,990,500C990,433.9,977,369.7,951.5,309.3z M500,922.5C267.1,922.5,77.5,733,77.5,500S267.1,77.5,500,77.5C732.9,77.5,922.5,267,922.5,500C922.5,733,732.9,922.5,500,922.5z M652.7,294.5C652.7,294.5,652.7,294.5,652.7,294.5l-157,157.3l-157.3-157c-13.6-13.6-35.7-13.6-49.3,0c0,0,0,0,0,0c-13.6,13.6-13.6,35.7,0,49.3l157.3,157l-157,157.3c-13.6,13.6-13.6,35.7,0.1,49.3c13.6,13.6,35.7,13.6,49.3,0c0,0,0,0,0,0l157-157.3l157.3,157c13.6,13.6,35.7,13.6,49.3,0c0,0,0,0,0,0c13.6-13.6,13.5-35.7-0.1-49.3L545,501.1l157-157.3c13.6-13.6,13.6-35.7-0.1-49.3C688.3,280.9,666.3,280.9,652.7,294.5z"/></g>
         </svg>
-        .votingItem Спасибо! <br> Ваш голос учтен
+        .votingItem Спасибо! <br> Ваш голос принят
           .completeSubText Можно изменть свой выбор <br>до окончания голосования
   script(src="/javascripts/vue.min.js")
   script(src="/javascripts/moment.min.js")

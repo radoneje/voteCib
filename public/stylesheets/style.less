@@ -954,7 +954,7 @@ body {
   opacity: .5;
 }
 .voteWr{
-  background:rgba(0, 0, 0, 0.4);
+  background:rgba(0, 0, 0, 0.05);
   padding:24px;
 
   box-sizing: border-box;
@@ -967,7 +967,7 @@ body {
   border-radius: 8px;
 }
 .voteTitle{
-color:#FFFFFF;
+color: #2d2d2d;
   text-align:center;
   margin-bottom:12px;
   font-weight: 500;
@@ -1062,8 +1062,13 @@ color:#FFFFFF;
   background: #ffffff;
   color: #000000;
   width: 100%;
-  font-size: 18px;
-  line-height: 22px;
+  font-size: 24px;
+
+  margin-bottom: 24px;
+
+}
+.tagBody{
+  margin-top:24px;
 }
 .votingText input[readonly]{
   background-color: #a7d0cb;
@@ -1076,17 +1081,67 @@ color:#FFFFFF;
   margin-top: 24px;
   margin-left: 12px;
   font-size: 16px;
+  line-height: 20px;
+
+  color:#2d2d2d;
 }
- .votingButton.active{
-  color:#FFFFFF;
-  background:#01766d;
-}
+
 .votingButton.active{
   cursor:auto;
   color:#FFFFFF;
   background:#01766d;
 
 }
+.votingButtonTitle{
+  width: 100%;
+  text-align: center;
+}
+.votingButtonSubTitle{
+  padding: 8px 0;
+  text-align: center;
+  color:#eff3ff;
+  box-sizing: border-box;
+  width: 100%;
+
+}
+///.multy
+ .votingButtonTitle{
+  text-align: left;
+}
+ .votingButton{
+  position: relative;
+  text-align: left;
+  padding-left: 60px !important;
+  box-sizing: border-box;
+}
+ .votingButton.active::before{
+  position: absolute;
+  content: '';
+  border-radius: 16px  ;
+  top: 4px;
+  left: 4px;
+  height: calc(50px - 10px);
+  width: calc(50px - 10px);
+  background-color: #01766d;
+}
+ .votingButton::before{
+  box-sizing: border-box;
+  position: absolute;
+  content: '';
+  border-radius: 16px  ;
+  top: 4px;
+  left: 4px;
+  height: calc(50px - 10px);
+  width: calc(50px - 10px);
+  border:2px solid #01766d;
+}
+
+ .votingButton.active{
+  cursor: pointer;
+  color:#2d2d2d;
+  background-color: white;
+}
+///end .multy
 .qItemText textarea{
   width: 100%;
   box-sizing: border-box;
@@ -1115,18 +1170,7 @@ color:#FFFFFF;
 .opacity{
   opacity:1;
 }
-.votingButtonTitle{
-  width: 100%;
-  text-align: center;
-}
-.votingButtonSubTitle{
-  padding: 8px 0;
-  text-align: center;
-  color:#eff3ff;
-  box-sizing: border-box;
-  width: 100%;
 
-}
 .completeWr{
 
   position: fixed;
@@ -1168,6 +1212,20 @@ color:#FFFFFF;
   top: 16px;
   right: 16px;
   cursor: pointer;
+}
+.votingConfirm{
+  cursor: pointer;
+  padding: 24px;
+  border-radius: 12px;
+  font-size: 24px;
+  font-weight: 300;
+  width: max-content;
+  background: white;
+  color:#2d2d2d;
+  margin: 12px auto;
+}
+.votingConfirm:hover{
+  background: #02bdaf;;
 }
 @media screen  and (max-width:1440px){
   .subTitle {
@@ -1616,7 +1674,7 @@ color:#FFFFFF;
 
 }
 
-@media screen  and (max-width:480px){
+@media screen  and (max-width:840px){
 
   body{min-height: 100vh;}
   .lTower {
@@ -1630,7 +1688,7 @@ color:#FFFFFF;
   }
   .votingButton{
     margin:12px 0;
-    padding:12px 0;
+    padding:14px 0;
     width:100%;
   }
 }
