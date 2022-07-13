@@ -16,8 +16,8 @@ block content
               .votingButtonTitle(v-show="!Uanswers['tags'+tag.id]" :id="'btn'+tag.id" style="text-align: center;") Отправить ответ
               .votingButtonTitle(v-show="Uanswers['tags'+tag.id]" style="text-align: center;")  Ваш ответ принят
               .votingButtonSendingStatusWr
-          .tagBody(v-if="tag.iscompl" style="margin-top:24px;")
-            .cloudContainer(:id="'cloud'+tag.id" v-if="tag.iscompl")
+          .tagBody(v-show="tag.iscompl" style="margin-top:24px;")
+            .cloudContainer(:id="'cloud'+tag.id")
             .tst(style="display:none") {{getCloud(tag)}};
 
       .voteWr(v-for="v in vote")

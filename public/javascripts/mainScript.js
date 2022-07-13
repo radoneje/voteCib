@@ -1,5 +1,6 @@
 (() => {
     var completeWrTimeout=null;
+    let chart=null;
     let app = new Vue({
         el: "#app",
         data: {
@@ -25,7 +26,13 @@
                    return;
                setTimeout(async ()=>{
                     var dt= await axios.get("/api/tagRes/"+item.id);
+                    if(chart) {
+                        document.getElementById("cloud" + item.id).innerHTML = "";
+
+                        chart=null;
+                    }
                     chart = anychart.tagCloud(dt.data);
+
                     chart.container("cloud"+item.id);
                    chart.fromAngle(0);
                    chart.toAngle(0);
