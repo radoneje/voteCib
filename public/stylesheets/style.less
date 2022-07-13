@@ -1111,10 +1111,23 @@ color: #2d2d2d;
  .votingButton{
   position: relative;
   text-align: left;
-  padding-left: 60px !important;
+  padding:14px;
   box-sizing: border-box;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+
 }
- .votingButton.active::before{
+ .votingButtonBefore{
+   height: calc(50px - 10px);
+   width: calc(50px);
+   border-radius: 16px  ;
+   border:2px solid #01766d;
+ }
+.votingButton.active .votingButtonBefore{
+  background-color: #01766d;
+}
+ /*.votingButton.active::before{
   position: absolute;
   content: '';
   border-radius: 16px  ;
@@ -1134,7 +1147,7 @@ color: #2d2d2d;
   height: calc(50px - 10px);
   width: calc(50px - 10px);
   border:2px solid #01766d;
-}
+}*/
 
  .votingButton.active{
   cursor: pointer;
@@ -1688,7 +1701,7 @@ color: #2d2d2d;
   }
   .votingButton{
     margin:12px 0;
-    padding:14px 0;
+
     width:100%;
   }
 }
