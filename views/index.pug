@@ -13,11 +13,11 @@ block content
               input(v-if="!Uanswers['tags'+tag.id]" :id="'taginput'+tag.id" placeholder="Ваш ответ" v-on:keypress="tagInputKeyPress($event, tag)" v-model="tagAnswer['tags'+tag.id]" maxlength="30 ")
               input(v-if="Uanswers['tags'+tag.id]" :id="'taginput'+tag.id" placeholder="Ваш ответ" v-model="Uanswers['tags'+tag.id]" readonly="readonly")
             .votingButton(v-on:click="tagSend(tag, $event)" v-bind:class="{active:Uanswers['tags'+tag.id]}" style="max-width: 300px;margin: 0 auto")
-              .votingButtonTitle(v-show="!Uanswers['tags'+tag.id]" :id="'btn'+tag.id") Отправить ответ
+              .votingButtonTitle(v-show="!Uanswers['tags'+tag.id]" :id="'btn'+tag.id" style="text-align: center;") Отправить ответ
               .votingButtonTitle(v-show="Uanswers['tags'+tag.id]" style="text-align: center;")  Ваш ответ принят
               .votingButtonSendingStatusWr
           .tagBody(v-if="tag.iscompl" style="margin-top:24px;")
-            .cloudContainer(:id="'cloud'+tag.id")
+            .cloudContainer(:id="'cloud'+tag.id" v-if="tag.iscompl")
             .tst(style="display:none") {{getCloud(tag)}};
 
       .voteWr(v-for="v in vote")
