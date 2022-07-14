@@ -17,7 +17,7 @@
             vote:[],
             status:{},
             isLoaded:false,
-            timeout:20,
+            timeout:5,
             logTimeout:60
         },
         methods: {
